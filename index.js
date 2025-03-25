@@ -1,15 +1,28 @@
 const express = require("express");
-const jwt = require("jsonwebtoken");
-const authrouters = require("./Routes/authrouters.js");
 const verifyToken = require("./Middlewares/authmiddleware.js");
-const bcrypt = require("bcrypt");
-
+const cookieParser = require("cookie-parser");
+const cors = require("cors");
+const transactionrouter = require("./Routes/transactionrouter.js")
 const app = express();
+
+app.use(cookieParser());
 app.use(express.json());
+app.use(cors({
+    origin: "http://localhost:5000",
+    credentials: true
+}));
+
+app.get("/user", verifyToken, (req, res) => {
+    console.log('Authenticated user:', req.user);
+    res.json({
+        message: "Access granted!",
+        user: req.user
+    });
+});
 
 // Test route
-app.use('/api/auth', authrouters);
-app.use('/api/verify', verifyToken);
+app.use('/transaction', verifyToken, transactionrouter)
 
 const PORT = 6000;
 app.listen(PORT, () => console.log(`🚀 Server running on port http://localhost:${PORT}`));
+
