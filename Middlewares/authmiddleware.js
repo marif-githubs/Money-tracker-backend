@@ -4,20 +4,21 @@ const dotenv = require("dotenv").config();
 const verifyToken = (req, res, next) => {
 
 
-    const token = req.cookies.JWT_token;
-
+    const Authhead = req.headers.Authorization || req.headers.authorization;
+    // console.log(Authhead);
+    const token = Authhead.split(" ")[1];
     // console.log(token);
     try {
 
         if (!token) {
-            return res.status(401).json({ message: "Access Denied: No Token Provided" });
+            return res.status(403).json({ message: "Access Denied: No Token Provided" });
             //redirect to login page.
         }
 
         jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
 
             if (err) {
-                res.status(403).json({ message: "Invalid or Expired Token" });
+                return res.status(403).json({ message: "Invalid or Expired Token" });
             }
 
             req.user = decoded;

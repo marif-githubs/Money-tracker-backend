@@ -8,7 +8,7 @@ const app = express();
 app.use(cookieParser());
 app.use(express.json());
 app.use(cors({
-    origin: "http://localhost:5000",
+    origin: 'http://localhost:5173',
     credentials: true
 }));
 
@@ -23,6 +23,6 @@ app.get("/user", verifyToken, (req, res) => {
 // Test route
 app.use('/transaction', verifyToken, transactionrouter)
 
-const PORT = 6000;
+const PORT = 5000;
 app.listen(PORT, () => console.log(`🚀 Server running on port http://localhost:${PORT}`));
 
