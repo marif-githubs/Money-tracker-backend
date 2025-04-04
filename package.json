@@ -4,7 +4,7 @@
   "description": "this is just for practice server",
   "main": "index.js",
   "scripts": {
-    "test": "nodemon index.js"
+    "start": "nodemon index.js"
   },
   "author": "marif",
   "license": "ISC",
