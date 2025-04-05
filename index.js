@@ -9,7 +9,7 @@ const app = express();
 
 app.use(express.json());
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: 'https://money-tracker-frontend-marif-githubs-projects.vercel.app',
     credentials: true
 }));
 
