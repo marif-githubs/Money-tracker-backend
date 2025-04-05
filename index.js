@@ -28,6 +28,6 @@ app.get("/user", verifyToken, (req, res) => {
 app.use('/transaction', verifyToken, transactionrouter)
 app.use('/userAuth', authrouter)
 
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`🚀 Server running on port http://localhost:${PORT}`));
 
